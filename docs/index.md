@@ -8,3 +8,4 @@
 | Лаба | Тема | Код в репозитории |
 |------|------|-------------------|
 | [ЛР1](lr1/report.md) | Работа с сокетами | `students/K3339/Sokolov_Nikita/laboratory_work_1/` |
+| [ЛР2](lr2/report.md) | Django, табло автогонок (вар. 6) | `students/K3339/Sokolov_Nikita/laboratory_work_2/` |
