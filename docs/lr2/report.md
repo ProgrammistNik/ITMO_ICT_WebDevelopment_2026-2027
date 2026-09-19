@@ -80,6 +80,7 @@
 
 ```bash
 cd students/K3339/Sokolov_Nikita/laboratory_work_2
+cp .env.example .env
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
@@ -87,7 +88,4 @@ python manage.py seed_data
 python manage.py runserver
 ```
 
-| Логин | Пароль |
-|-------|--------|
-| `admin` | `admin123` |
-| `racer1` | `racer123` |
+Демо-пароли задаются в `.env` (файл не в git). Логины: `admin`, `racer1`.

@@ -1,6 +1,7 @@
 from datetime import date, timedelta
+import os
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from races.models import Race, RaceComment, RaceEntry, RaceResult, User
 
@@ -9,22 +10,30 @@ class Command(BaseCommand):
     help = "Seed demo races, users, entries, results, comments"
 
     def handle(self, *args, **options):
+        admin_password = os.environ.get("DEMO_ADMIN_PASSWORD")
+        user_password = os.environ.get("DEMO_USER_PASSWORD")
+        if not admin_password or not user_password:
+            raise CommandError(
+                "Задайте DEMO_ADMIN_PASSWORD и DEMO_USER_PASSWORD "
+                "(скопируйте .env.example в .env и заполните значения)"
+            )
+
         admin, created = User.objects.get_or_create(
             username="admin",
             defaults={"is_staff": True, "is_superuser": True, "email": "admin@example.com"},
         )
         if created:
-            admin.set_password("admin123")
+            admin.set_password(admin_password)
             admin.save()
 
         racer, created = User.objects.get_or_create(username="racer1", defaults={"email": "racer1@example.com"})
         if created:
-            racer.set_password("racer123")
+            racer.set_password(user_password)
             racer.save()
 
         racer2, created = User.objects.get_or_create(username="racer2", defaults={"email": "racer2@example.com"})
         if created:
-            racer2.set_password("racer123")
+            racer2.set_password(user_password)
             racer2.save()
 
         titles = [
@@ -96,4 +105,4 @@ class Command(BaseCommand):
             },
         )
 
-        self.stdout.write(self.style.SUCCESS("OK: admin/admin123, racer1/racer123"))
+        self.stdout.write(self.style.SUCCESS("OK: demo users admin / racer1 / racer2"))

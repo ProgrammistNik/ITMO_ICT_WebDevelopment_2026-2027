@@ -5,9 +5,14 @@ Django 4.2 + PostgreSQL.
 ## Требования
 
 - Python 3.9+
-- PostgreSQL 
+- PostgreSQL
 
-Создать БД `racing_db`, пользователь `postgres`, пароль `postgres` (или задать свои через переменные окружения `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_HOST`, `POSTGRES_PORT`).
+Создать БД `racing_db`. Параметры подключения и демо-пароли задаются в файле `.env` (не коммитится).
+
+```bash
+cp .env.example .env
+# заполните DJANGO_SECRET_KEY, POSTGRES_*, DEMO_*_PASSWORD
+```
 
 ## Запуск
 
@@ -29,10 +34,7 @@ python manage.py runserver
 
 Сайт: http://127.0.0.1:8000/
 
-| Логин | Пароль | Роль |
-|-------|--------|------|
-| admin | admin123 | администратор |
-| racer1 | racer123 | пользователь |
+Учётные записи после `seed_data` — те, что указаны в `.env` (`DEMO_ADMIN_PASSWORD`, `DEMO_USER_PASSWORD`). Логины: `admin`, `racer1`.
 
 ## Функционал
 
@@ -40,6 +42,6 @@ python manage.py runserver
 - Список гонок с поиском и пагинацией
 - Регистрация на гонку, правка и удаление своей заявки
 - Комментарии (тип, рейтинг 1–10, дата заезда)
-- Staff в клиенте: CRUD гонок и результатов
+- Администратор в клиенте: CRUD гонок и результатов
 - Таблица участников и результатов
-- Django-admin: `/admin/`
+- Панель Django: `/admin/`
